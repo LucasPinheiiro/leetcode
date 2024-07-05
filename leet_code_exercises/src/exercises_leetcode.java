@@ -12,11 +12,11 @@ class Solution {
         List<String> result = new List<String>;
         for (int i = 0; i <= n; i++){
             if((n%3==0) && (n%5==0)){
-                result[i] = "FizzBuzz"
+                result[i] = "FizzBuzz";
             }else if(n%3==0){
-                result[i] = "Fizz"
+                result[i] = "Fizz";
             }else if(n%5==0){
-                result[i] = "Buzz"
+                result[i] = "Buzz";
             }else{
                 result[i] = String.valueOf(i);
             }
