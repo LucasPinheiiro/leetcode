@@ -1,10 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
-
+import Solutions.Solution;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Solution sol = new Solution();
-        System.out.println(canConstruct("aa", "abc"));
+        System.out.println(sol.canConstruct("aa", "aabc"));
     }
 }
