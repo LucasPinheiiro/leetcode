@@ -1,4 +1,4 @@
-import Solutions.Solution;
+import solutions.Solution;
 
 public class App {
     public static void main(String[] args) throws Exception {
