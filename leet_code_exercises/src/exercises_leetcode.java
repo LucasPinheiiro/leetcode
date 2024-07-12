@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ class Solution {
         }
         return result;
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
     /*
      * 1342. Number of steps to reduce a number to zero
      * 
@@ -48,5 +49,27 @@ class Solution {
         }
         return steps;
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> constructor = new HashMap<>();
+        //put the magazine string on hashmap, each position
+        for(char c : magazine.toCharArray()){
+            if(constructor.containsKey(c)){
+                constructor.put(c, constructor.get(c) + 1);
+            }else{
+                constructor.put(c, 1);
+            }
+        }
+        
+        //check if we can form the ransomNote with magazine letters
+        for (char c : ransomNote.toCharArray()){
+            if(constructor.containsKey(c)){
+                constructor.put(c, constructor.get(c) - 1);
+                if(constructor.get(c) == 0) constructor.remove(c);
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
 }
