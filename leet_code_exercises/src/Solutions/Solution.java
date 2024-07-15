@@ -74,4 +74,23 @@ public class Solution {
         }
         return true;
     }
+
+    public int findNumbers(int[] nums) {
+        //place to store how many numbers have even digits
+        int result = 0;
+        //iterate over the items
+        for(int q : nums){
+            if(HasEvenDigits(q))result++;
+        }
+        return result;
+    }
+    
+    public boolean HasEvenDigits(int num){
+        boolean isEven = false;
+        while((num/10)!= 0){
+            num = num/10;
+            isEven = !isEven;
+        }
+        return isEven;
+    }
 }
