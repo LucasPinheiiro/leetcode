@@ -2,6 +2,7 @@ package solutions;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
@@ -74,7 +75,10 @@ public class Solution {
         }
         return true;
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * function to calculate how many numbers with even digits are in the given array
+ */
     public int findNumbers(int[] nums) {
         //place to store how many numbers have even digits
         int result = 0;
@@ -92,5 +96,40 @@ public class Solution {
             isEven = !isEven;
         }
         return isEven;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * funtion that sqaures the numbers that are given in a crescent order. Must return
+ * an array with the numbers squared in the crescent order too
+ */
+    public int[] sortedSquares(int[] nums) {
+        int[] squared = new int[nums.length];
+        //iterate over the whole array of integers
+        for(int i=0; i<nums.length; i++){
+            squared[i] = nums[i]*nums[i];
+        }
+        //return the numbers squared and ordered in crescent order
+        Arrays.sort(squared);
+        return squared;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given a fixed-length integer array arr, 
+ * duplicate each occurrence of zero, shifting the remaining elements to the right.
+ */
+    public void duplicateZeros(int[] arr) {
+        //start searching the array from beggining
+        //whe finds a zero, go to the end and start copying the [n-1] into [n] position
+        //stops when the indexes i == j
+        //jumps the recently added zero and iterate over the entire array
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] == 0){
+                for(int j = arr.length -1; j > i; j--){
+                    arr[j] = arr[j-1];
+                }
+                //skip the zero just added in front o the '0' occurrence
+                i++;
+            }
+        }
     }
 }
