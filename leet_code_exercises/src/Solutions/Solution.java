@@ -139,23 +139,53 @@ public class Solution {
 * Merge nums1 and nums2 into a single array sorted in non-decreasing order.
  */
     public void merge(int[] nums1, int m, int[] nums2, int n) {
+        if (m == 0) {
+            System.arraycopy(nums2, 0, nums1, 0, n);
+            m = n;
+            return;
+        }       
         for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                if((nums2[i] >= nums1[j]) && (nums2[i] < nums1[j+1])){ //criteria to insert the number in the position : must be greater/equal to idx and lower than the next
-                    //shifts the ending of the array one position left till the poin of insertion
-                    for(int k = m; k > j; k--){ 
-                        nums1[k] = nums1[k-1];
+                for(int j = 0; j < m; j++){
+                    if(((nums2[i] >= nums1[j]) && (nums2[i] < nums1[j+1])) || m == (j+1) ){ //criteria to insert the number in the position : must be greater/equal to idx and lower than the next
+                        //shifts the ending of the array one position left till the poin of insertion
+                        for(int k = m; k > j; k--){ 
+                            nums1[k] = nums1[k-1];
+                        }
+                        //insert the number from nums2 into nums1, in front of the actual index
+                        if(m==1){
+                            nums1[j] = nums2[i];
+                        }else{
+                            nums1[j+1] = nums2[i];
+                        }    
+                        // increment the populated size of nums1
+                        m++; 
+                        // jumps the recently added number
+                        j++; 
+                        //get out of actual insertion and seeks another number to insert in nums1 from nums2
+                        break;
                     }
-                    //insert the number from nums2 into nums1, in front of the actual index
-                    nums1[j+1] = nums2[i];
-                    // increment the populated size of nums1
-                    m++; 
-                    // jumps the recently added number
-                    j++; 
-                    //get out of actual insertion and seeks another number to insert in nums1 from nums2
-                    break;
                 }
+        }
+        ;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. 
+ * The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+ */
+    public int removeElement(int[] nums, int val) {
+        int size = nums.length;
+        for(int i = 0; i < size;){
+            if(nums[i] == val){
+                //shifts the remaining array to the left erasing the number in the current position
+                for(int j = i; j<(size-1); j++){
+                    nums[j] = nums[j + 1];
+                }
+                size--;
+            }else{
+                i++;
             }
         }
+        return size;
     }
 }
