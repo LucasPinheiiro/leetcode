@@ -236,4 +236,54 @@ public class Solution {
         }
         return false;
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given an array of integers arr, return true if and only if it is a valid mountain array.
+* 
+* Recall that arr is a mountain array if and only if:
+* 
+* -> arr.length >= 3
+* -> There exists some i with 0 < i < arr.length - 1 such that:
+*   - arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+*   - arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+ */
+public enum State {
+    NEW,
+    INCREASING,
+    DECREASING
+}
+
+public boolean validMountainArray(int[] arr) {
+
+        State state = State.NEW; //0: new; 1:increasing; 2:decreasing
+        //cover edge cases
+        if(arr.length < 3) return false;
+        //iterate over all elements of array
+
+        for(int i =1; i<arr.length; i++){
+            if (arr[i]>arr[i-1]){
+                if(state == State.NEW){
+                    //the array is increasing
+                    state = State.INCREASING;
+                }else if(state == State.INCREASING){
+                    //the array is arising after started decreasing
+                    continue;
+                }else{
+                    //other case must exit with false, because its not following the piramid order
+                    return false;
+                }
+            }else if (arr[i]<arr[i-1]){
+                if(state == State.INCREASING){
+                    //turn point, where it begins to decrease
+                    state = State.DECREASING;
+                }if(state==State.NEW){
+                    return false;
+                }
+                if((i == arr.length -1) && (state == State.DECREASING)) return true;
+            }else{
+                break;
+            }
+        }
+        return false;
+    }
 }
