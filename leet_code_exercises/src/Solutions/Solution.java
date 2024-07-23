@@ -188,4 +188,52 @@ public class Solution {
         }
         return size;
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    * Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place 
+    * such that each unique element appears only once. The relative order of the elements should 
+    * be kept the same.Then return the number of unique elements in nums.
+    */
+    public int removeDuplicates(int[] nums) {
+            int unique_numbers = 1;
+            int previous = nums[0];
+            int size = nums.length;
+            for(int i = 1; i < size; i++){
+                //check if this entry is a repeated one
+                while((nums[i] == previous)&&(!(i == size))){
+                    //shift the remaining array to this position
+                    for(int j = i; j<(nums.length-1); j++){
+                        nums[j] = nums[j + 1];
+                    }
+                    size--;
+                }
+                if(size==i)break;
+                unique_numbers++;
+                previous = nums[i];
+            }
+            return unique_numbers;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+* Given an array arr of integers, check if there exist two indices i and j such that :
+* 
+* i != j
+* 0 <= i, j < arr.length
+* arr[i] == 2 * arr[j]
+ */
+    public boolean checkIfExist(int[] arr) {
+        //cover edge cases where the array has no size to meet the criteria
+        if(arr.length == 0 || arr.length == 1)return false;
+        //iterate over all indexes i
+        for(int i = 0; i<arr.length; i++){
+            //start index j too
+            for(int j = 0; j<arr.length; j++){
+                if(i == j) continue;
+                int a = arr[i];
+                int b = arr[j] * 2;
+                if(a == b)return true;
+            }
+        }
+        return false;
+    }
 }
