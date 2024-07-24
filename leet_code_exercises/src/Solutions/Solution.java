@@ -253,7 +253,7 @@ public enum State {
     DECREASING
 }
 
-public boolean validMountainArray(int[] arr) {
+    public boolean validMountainArray(int[] arr) {
 
         State state = State.NEW; //0: new; 1:increasing; 2:decreasing
         //cover edge cases
@@ -285,5 +285,34 @@ public boolean validMountainArray(int[] arr) {
             }
         }
         return false;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    * Given an array arr, replace every element in that array with the greatest element among the elements to its right, and replace the last element with -1.
+    *
+    *  After doing so, return the array.
+    */
+    public int[] replaceElements(int[] arr) {
+        //check for edge cases
+        if(arr == null) return arr;
+        //initiate the iteration by the beggining of the arr
+        for(int i = 0; i<arr.length; i++){
+            //create an auxiliary variable
+            int current_greatest = 0;
+            //first, check if we are at the last element, if so, put -1 on it
+            if(i == arr.length-1){
+                arr[i] = -1;
+                //the remaining of the loop doesn't need to execute
+                break;
+            }
+            //serach for the greatest element on its right
+            for(int j = i+1; j<arr.length; j++){
+                //when found, save it to keep comparing with the nexts
+                if(arr[j] > current_greatest)current_greatest = arr[j];
+            }
+            //put the found greatest value at the current index
+            arr[i] = current_greatest;
+        }
+        return arr;
     }
 }
