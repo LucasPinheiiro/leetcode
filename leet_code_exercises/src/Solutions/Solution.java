@@ -340,4 +340,24 @@ public enum State {
         }
         return unique_elements;
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+ *
+ * Note that you must do this in-place without making a copy of the array.
+ * 
+ */
+    public void moveZeroes(int[] nums) {
+        //tracks the non zero elements
+        int non_zero_elements = 0;  
+        // search the non zero elements to put them in the beggining of the array
+        for(int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[non_zero_elements++] = nums[i];
+            }
+        }
+        while (non_zero_elements < nums.length) {
+            nums[non_zero_elements++] = 0;
+        }
+    }
 }
