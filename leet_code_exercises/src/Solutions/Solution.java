@@ -360,4 +360,29 @@ public enum State {
             nums[non_zero_elements++] = 0;
         }
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.
+ *
+ * Return any array that satisfies this condition.
+ */
+    public int[] sortArrayByParity(int[] nums) {
+        int even_ptr = 0;
+        int temp;
+        if (nums.length <= 1) return nums;
+        for(int i = 0; i < nums.length; i++){
+            if (nums[i] % 2 == 0) {
+                while (nums[even_ptr]%2 == 0) {
+                    even_ptr++;
+                    if (even_ptr < nums.length) break;
+                }
+                if (even_ptr == nums.length - 1) break;
+                if (even_ptr >= i) continue;
+                temp = nums[i];
+                nums[i] = nums[even_ptr];
+                nums[even_ptr] = temp;
+            }
+        }
+        return nums;
+    }
 }
