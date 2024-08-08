@@ -315,12 +315,81 @@ public enum State {
         }
         return arr;
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////
-/*
- * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place.
- * The order of the elements may be changed. 
- * Then return the number of elements in nums which are not equal to val.
- */
+    /*
+    * 
+    * Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+    *   
+    *   Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+    *   
+    *   Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+    *   Return k.
+    */
+    public int removeDuplicates2(int[] nums) {
+        //edge cases
+        if(nums.length == 0)return 0;
+        //the first element is unique
+        int unique_elements = 1;
+        //check for the following elements
+        for(int i = 1; i<nums.length; i++){
+            //two pointers tacks the data, unique_elements tracks the unique elemets
+            //when a new element is found, it just go to unique position and rewrites that position with the unique value
+            if( !(nums[i-1] == nums[i]) ){
+                nums[unique_elements++] = nums[i];
+            }
+        }
+        return unique_elements;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    * Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    *
+    * Note that you must do this in-place without making a copy of the array.
+    * 
+    */
+    public void moveZeroes(int[] nums) {
+        //tracks the non zero elements
+        int non_zero_elements = 0;  
+        // search the non zero elements to put them in the beggining of the array
+        for(int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[non_zero_elements++] = nums[i];
+            }
+        }
+        while (non_zero_elements < nums.length) {
+            nums[non_zero_elements++] = 0;
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    * Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.
+    *
+    * Return any array that satisfies this condition.
+    */
+    public int[] sortArrayByParity(int[] nums) {
+        int even_ptr = 0;
+        int temp;
+        if (nums.length <= 1) return nums;
+        for(int i = 0; i < nums.length; i++){
+            if (nums[i] % 2 == 0) {
+                while (nums[even_ptr]%2 == 0) {
+                    even_ptr++;
+                    if (even_ptr < nums.length) break;
+                }
+                if (even_ptr == nums.length - 1) break;
+                if (even_ptr >= i) continue;
+                temp = nums[i];
+                nums[i] = nums[even_ptr];
+                nums[even_ptr] = temp;
+            }
+        }
+        return nums;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+     * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place.
+     * The order of the elements may be changed. 
+     * Then return the number of elements in nums which are not equal to val.
+     */
     public int removeElementInPlace(int[] nums, int val) {
         int ptr = 0;
         //iterate over the array
