@@ -315,4 +315,24 @@ public enum State {
         }
         return arr;
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place.
+ * The order of the elements may be changed. 
+ * Then return the number of elements in nums which are not equal to val.
+ */
+    public int removeElementInPlace(int[] nums, int val) {
+        int ptr = 0;
+        //iterate over the array
+        for(int i = 0; i<nums.length; i++){
+            //if found a number different of val, put it to the beginning of the array
+            if(nums[i] != val){
+                int aux = nums[ptr];
+                nums[ptr] = nums[i];
+                nums[i] = aux;
+                ptr++;
+            }
+        }
+        return ptr;
+    }
 }
