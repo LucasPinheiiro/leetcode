@@ -31,7 +31,7 @@ public class Solution {
             }
         }
         return result;
-    }
+    } 
 //////////////////////////////////////////////////////////////////////////////////////////////////
     /*
      * 1342. Number of steps to reduce a number to zero
@@ -384,5 +384,19 @@ public enum State {
             }
         }
         return nums;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+* A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height. 
+* Let this ordering be represented by the integer array expected where expected[i] is the expected height of the ith student in line.
+*/
+    public int heightChecker(int[] heights) {
+        int differences = 0;
+        int[] ordered_heights = Arrays.copyOf(heights, heights.length);
+        Arrays.sort(ordered_heights);
+        for (int i = 0; i<heights.length; i++) {
+            if (heights[i] != ordered_heights[i]) differences++;
+        }
+        return differences;
     }
 }
