@@ -418,4 +418,38 @@ public enum State {
         }
         return differences;
     }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Given an integer array nums, return the third distinct maximum number in this array. 
+ * If the third maximum does not exist, return the maximum number.
+ */
+    public int thirdMax(int[] nums) {
+        // variable to track the fisrt three maximus
+        Integer first_maximum = null, second_maximum = null, third_maximum = null;
+        int to_return;
+        // iterate only once along array to define the values
+        for (int number : nums) {
+            if (first_maximum == null || number > first_maximum ){
+                third_maximum = second_maximum;
+                second_maximum = first_maximum;
+                first_maximum = number;
+            }else if (second_maximum == null || number > second_maximum) {
+                if (number == first_maximum) continue;
+                third_maximum = second_maximum;
+                second_maximum = number;
+            }else if (third_maximum == null || (number > third_maximum && number != second_maximum)) {
+                if (number == second_maximum) continue;
+                third_maximum = number;
+            }
+        }
+        // select the correct return value
+        if (third_maximum == null) {
+            to_return = first_maximum;
+        }else{
+            to_return = third_maximum;
+        }
+
+        return to_return;
+    }
 }
